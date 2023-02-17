@@ -1,0 +1,14 @@
+Here is the backend code.
+
+Private API key
+fdcbc44eccb3ae537d029d430b805a0f-ca9eeb88-75eb8470
+
+Public API key
+pubkey-9ae5c51ea777cd606fe674811b188576
+This key is used for our V3 email verification service, newer versions of the verification API use the Private API key. Check out the documentation for more information.
+
+HTTP webhook signing key
+fdcbc44eccb3ae537d029d430b805a0f-ca9eeb88-75eb8470
+
+domain
+http://sandbox279017ec456a4414b0552b8bf723ec1d.mailgun.org/

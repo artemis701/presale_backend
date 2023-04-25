@@ -10,4 +10,7 @@ router.get('/getapikey', rounds.getAPIKey);
 router.get('/getbsctokinfo', rounds.getBSCTokenInfo);
 router.get('/getethtokinfo', rounds.getETHTokenInfo);
 
+router.get('/getspltokinfo', rounds.getSPLTokenInfo);
+router.get('/getmetaplexinfo', rounds.getMetaplexInfo);
+
 module.exports = router;

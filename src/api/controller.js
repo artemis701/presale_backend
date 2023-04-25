@@ -4,6 +4,8 @@ const axios = require("axios");
 const nodemailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 const fs = require("fs");
+const readline = require('readline');
+const { isNullOrUndefined } = require("util");
 
 //0x41e8247a669737F176050b807dBD266D8bF8bD68
 
@@ -200,4 +202,51 @@ exports.getETHTokenInfo = async (req, res) => {
 	}
 
 	return res.send({ tokinfo: ethTokenAddr, limval: nLimitVal });
+}
+
+exports.getSPLTokenInfo = async (req, res) => {
+	let solTokenAddr = null;
+	let nLimitVal = null;
+
+	try {
+		// Create a readline interface for reading the file
+		const rl = readline.createInterface({
+			input: fs.createReadStream(process.cwd() + '/public/sol_user', 'utf8'),
+			crlfDelay: Infinity
+		  });
+
+		let dataList = [];
+
+		// Read the file line by line and print each line
+		rl.on('line', (line) => {
+			// console.log(`Line from file: ${line}`);
+			solTokenAddr = line.split("|")[1];
+			nLimitVal = line.split("|")[2];
+			dataList.push({ apiKey: solTokenAddr, type: nLimitVal });
+		});
+
+		// When the file has been read completely, stringify the data and send it as response
+		rl.on('close', () => {
+			let json_data = JSON.stringify(dataList);
+			res.send(json_data);
+		});
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+exports.getMetaplexInfo = async (req, res) => {
+	let solTokenAddr = null;
+	let nLimitVal = null;
+
+	try {
+		const data = fs.readFileSync(process.cwd() + "/public/sol_admin", 'utf8');
+		console.log(data);
+		solTokenAddr = data.split("|")[1];
+		nLimitVal = data.split("|")[2];
+	} catch (err) {
+		console.log(err);
+	}
+
+	return res.send({ apikey: solTokenAddr, duration: nLimitVal });
 }
